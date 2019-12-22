@@ -1,0 +1,207 @@
+{
+  "version": "2.0.0",
+  "presentation": {
+    "echo": true,
+    "reveal": "always",
+    "focus": false,
+    "panel": "shared",
+    "showReuseMessage": false,
+    "clear": false
+  },
+  "tasks": [
+    {
+      "type": "shell",
+      "label": "cf test",
+      "command": "cf",
+      "args": ["test"],
+      "options": {
+        "cwd": "${fileDirname}"
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "dependsOn": ["cmake build"],
+      "problemMatcher": [],
+      "presentation": {
+        "echo": false,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": false,
+        "clear": true
+      }
+    },
+    {
+      "type": "shell",
+      "label": "cmake build",
+      "command": "sed",
+      "args": [
+        "'s/\\//_/g;s/\\.cpp$//'",
+        "<<<",
+        "'${relativeFile}'",
+        "|",
+        "xargs",
+        "cmake",
+        "--build",
+        "cmake-build-debug",
+        "--target"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": "build",
+      "problemMatcher": "$gcc",
+      "presentation": {
+        "echo": true,
+        "reveal": "silent",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": false,
+        "clear": false
+      }
+    },
+    {
+      "type": "shell",
+      "label": "clang++ build active file",
+      "command": "ccache",
+      "args": [
+        "clang++",
+        "-g",
+        "${file}",
+        "-o",
+        "${fileDirname}/a.out",
+        "-I/usr/local/opt/llvm/include",
+        "-Wall",
+        "-pedantic-errors",
+        "-std=c++14",
+        "-fsanitize=undefined",
+        "-Wno-deprecated",
+        "-Wno-unneeded-internal-declaration"
+      ],
+      "options": {
+        "cwd": "${fileDirname}",
+        "env": {
+          "CCACHE_COMPILER": "/usr/local/opt/llvm/bin/clang++"
+        }
+      },
+      "problemMatcher": "$gcc",
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "silent",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": false,
+        "clear": false
+      }
+    },
+    {
+      "type": "shell",
+      "label": "g++ build active file",
+      "command": "ccache",
+      "args": [
+        "g++",
+        "-g",
+        "${file}",
+        "-o",
+        "${fileDirname}/a.out",
+        "-std=c++14",
+        "-Wall"
+      ],
+      "osx": {
+        "args": [
+          "g++-9",
+          "-g",
+          "${file}",
+          "-o",
+          "${fileDirname}/a.out",
+          "-I/usr/local/include",
+          "-Wall",
+          "-pedantic-errors",
+          "-std=c++14"
+        ]
+      },
+      "options": {
+        "cwd": "${fileDirname}"
+      },
+      "problemMatcher": "$gcc",
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "silent",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": false,
+        "clear": false
+      }
+    },
+    {
+      "type": "shell",
+      "label": "cf submit",
+      "command": "cf",
+      "args": ["submit"],
+      "options": {
+        "cwd": "${fileDirname}"
+      },
+      "group": "none",
+      "problemMatcher": []
+    },
+    {
+      "type": "shell",
+      "label": "cf parse",
+      "command": "cf",
+      "args": [
+        "parse",
+        "${input:contest_id};",
+        "cd",
+        "cmake-build-debug;",
+        "cmake",
+        "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON",
+        ".."
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": "none",
+      "problemMatcher": []
+    },
+    {
+      "type": "shell",
+      "label": "cf open",
+      "command": "cf",
+      "args": ["open"],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": "none",
+      "problemMatcher": []
+    },
+    {
+      "type": "shell",
+      "label": "cmake rebuild cache",
+      "command": "cmake",
+      "args": ["-DCMAKE_EXPORT_COMPILE_COMMANDS=ON", ".."],
+      "options": {
+        "cwd": "${workspaceFolder}/cmake-build-debug"
+      },
+      "group": "none",
+      "problemMatcher": [],
+      "presentation": {
+        "echo": true,
+        "reveal": "silent",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": false,
+        "clear": false
+      }
+    }
+  ],
+  "inputs": [
+    {
+      "id": "contest_id",
+      "description": "Contest ID (e.g. 1234)",
+      "type": "promptString"
+    }
+  ]
+}

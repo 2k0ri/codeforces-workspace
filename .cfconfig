@@ -1,0 +1,17 @@
+{
+  "template": [
+    {
+      "alias": "cpp",
+      "lang": "52",
+      "path": "template.cpp",
+      "suffix": [
+        "cpp"
+      ],
+      "before_script": "",
+      "script": "./a.out",
+      "after_script": ""
+    }
+  ],
+  "default": 0,
+  "gen_after_parse": true
+}
