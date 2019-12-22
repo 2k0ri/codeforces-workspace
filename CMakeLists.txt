@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.15)
-project(atcoder_workspace CXX)
+project(codeforces_workspace CXX)
 
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_FLAGS "-g -Wall -pedantic-errors -fsanitize=undefined -Wno-deprecated -Wno-unneeded-internal-declaration")
