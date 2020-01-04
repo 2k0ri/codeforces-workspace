@@ -15,10 +15,10 @@ using ll = long long;
 #define mp make_pair
 #define coutl cout<<fixed<<setprecision(10)
 #define ANS(ans) cout<<ans<<endl;
-#define INF 1e9;
-#define LINF 1e18;
 template<class T>bool chmax(T &a, const T &b){if (a<b){a=b;return 1;}return 0;}
 template<class T>bool chmin(T &a, const T &b){if (b<a){a=b;return 1;}return 0;}
+const int INF = 1e9;
+const ll LINF = 1e18;
 // clang-format on
 
 int main() {
@@ -27,6 +27,10 @@ int main() {
   ll t;
   cin >> t;
   rep(i, t) {
+    ll h, m;
+    cin >> h >> m;
+    ANS(((23 - h) * 60 + (60 - m)));
   }
+
   return 0;
 }

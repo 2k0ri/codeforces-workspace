@@ -24,9 +24,22 @@ template<class T>bool chmin(T &a, const T &b){if (b<a){a=b;return 1;}return 0;}
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(nullptr);
-  ll t;
-  cin >> t;
-  rep(i, t) {
+  ll n, m;
+  cin >> n >> m;
+  vector<string> s(n), t(m);
+  rep(i, n) cin >> s[i];
+  rep(i, m) cin >> t[i];
+  ll q;
+  cin >> q;
+  rep(i, q) {
+    ll y;
+    cin >> y;
+    ll a = y % n, b = y % m;
+    if (a == 0)
+      a = n;
+    if (b == 0)
+      b = m;
+    ANS(s[a - 1] << t[b - 1]);
   }
   return 0;
 }
