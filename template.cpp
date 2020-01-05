@@ -3,7 +3,7 @@
 #pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,tune=native")
 #include <bits/stdc++.h>
 using namespace std;
-using ll = long long;
+typedef long long ll;
 #define rep(i,n) for(ll i=0, i##_len=(n); i<i##_len; ++i)
 #define rep1(i,n) for(ll i=1, i##_len=(n); i<=i##_len; ++i)
 #define rrep(i,n) for(ll i=n-1; i>=0; --i)
